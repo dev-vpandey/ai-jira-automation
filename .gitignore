@@ -1,0 +1,41 @@
+# OS files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+.swo
+*~
+
+# Environment variables (actual credentials)
+.env
+.env.local
+
+# Logs
+*.log
+logs/
+
+# User-generated outputs (keep example outputs for documentation)
+outputs/*
+!outputs/.gitkeep
+!outputs/README.md
+
+# Claude Code local settings (contains user-specific paths)
+.claude/settings.local.json
+.claude/projects/*/memory/
+
+# Temporary files (if any created in project directory)
+*.tmp
+*.temp
+.temp*
+
+# Working documents (not for version control)
+CHANGELOG.md
+migration_plan/
