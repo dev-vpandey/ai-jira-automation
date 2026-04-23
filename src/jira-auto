@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# JIRA Auto - Main entry point wrapper
+# This is a convenience wrapper that can be symlinked or aliased
+
+# Load shell utilities for cross-shell compatibility
+source "$(cd "$(dirname "${BASH_SOURCE[0]:-$0}")" && pwd)/scripts/lib/shell-utils.sh"
+SCRIPT_DIR=$(get_script_dir)
+
+exec "$SCRIPT_DIR/scripts/jira-workflow.sh" "$@"

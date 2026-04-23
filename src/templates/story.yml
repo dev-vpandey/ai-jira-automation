@@ -1,0 +1,263 @@
+# Story Template
+# JIRA Story issue template with wiki markup
+# Variables: {{variable_name}} with optional |default:"value"
+
+meta:
+  issue_type: "Story"
+  template_version: "1.0"
+  description: "Template for creating JIRA Stories from implementation plans"
+
+# Required fields
+required:
+  - summary
+  - description
+
+# Field definitions
+fields:
+  # Standard fields
+  summary:
+    variable: "{{story.summary}}"
+    description: "Story title - user-focused, clear, concise"
+    validation:
+      min_length: 10
+      max_length: 255
+      pattern: "^[A-Z].*"
+    examples:
+      - "Implement user authentication with OAuth2"
+      - "Add real-time data sync for dashboard widgets"
+      - "Create API endpoint for recommendation engine"
+
+  description:
+    variable: "{{story.description}}"
+    format: "wiki"
+    template: |
+      h2. 📖 User Story
+
+      *As a* {{story.user_type | default:"[user type/role]"}}
+      *I want* {{story.goal | default:"[what the user wants to accomplish]"}}
+      *So that* {{story.benefit | default:"[the value/benefit the user gets]"}}
+
+      h2. 📝 Description
+      {{story.detailed_description | default:"Provide detailed description of the feature/functionality."}}
+
+      h2. ✅ Acceptance Criteria
+
+      {{story.acceptance_criteria | default:"* *Given* [context]\n  *When* [action]\n  *Then* [outcome]\n\n* *Given* [context]\n  *When* [action]\n  *Then* [outcome]\n\n* *Given* [context]\n  *When* [action]\n  *Then* [outcome]"}}
+
+      h2. 🔧 Technical Requirements
+
+      {{story.technical_requirements | default:"* Requirement 1\n* Requirement 2\n* Requirement 3"}}
+
+      h2. 🏗️ Implementation Notes
+
+      *Architecture:*
+      {{story.architecture_notes | default:"* Describe architecture approach\n* Key components involved\n* Integration points"}}
+
+      *Technology/Tools:*
+      {{story.technology_notes | default:"* List relevant technologies\n* Libraries/frameworks\n* APIs/services"}}
+
+      *Data Model:*
+      {{story.data_model | default:"* Database changes\n* Schema updates\n* Data migrations"}}
+
+      h2. 🔗 Dependencies
+
+      *Blocked By:*
+      {{story.blocked_by | default:"* None"}}
+
+      *Blocks:*
+      {{story.blocks | default:"* None"}}
+
+      *Related To:*
+      {{story.related_to | default:"* None"}}
+
+      h2. 🧪 Testing Strategy
+
+      *Unit Tests:*
+      {{story.unit_tests | default:"* Test case 1\n* Test case 2"}}
+
+      *Integration Tests:*
+      {{story.integration_tests | default:"* Test scenario 1\n* Test scenario 2"}}
+
+      *Manual Testing:*
+      {{story.manual_tests | default:"* Test step 1\n* Test step 2"}}
+
+      *Edge Cases:*
+      {{story.edge_cases | default:"* Edge case 1\n* Edge case 2"}}
+
+      h2. 📊 Success Metrics
+      {{story.success_metrics | default:"* Metric 1: [Target]\n* Metric 2: [Target]"}}
+
+      h2. 🎨 UI/UX Considerations
+      {{story.ui_ux_notes | default:"* Design requirements\n* User flow\n* Mockups/wireframes: [link]"}}
+
+      h2. 🔒 Security Considerations
+      {{story.security_notes | default:"* Authentication/Authorization\n* Data validation\n* Security best practices"}}
+
+      h2. 📈 Performance Requirements
+      {{story.performance_requirements | default:"* Response time: [target]\n* Throughput: [target]\n* Resource usage: [constraints]"}}
+
+      h2. 📚 Documentation
+      {{story.documentation_notes | default:"* API documentation\n* User documentation\n* Code comments"}}
+
+      h2. 🚀 Deployment Notes
+      {{story.deployment_notes | default:"* Configuration changes\n* Environment variables\n* Migration scripts"}}
+
+      h2. 📝 Additional Notes
+      {{story.notes | default:"Add any additional context, links, or references."}}
+
+      ----
+      _Generated via AI JIRA Automation on {{timestamp}}_
+
+  priority:
+    variable: "{{story.priority}}"
+    default: "Medium"
+    allowed_values: ["Highest", "High", "Medium", "Low", "Lowest"]
+
+  labels:
+    variable: "{{story.labels}}"
+    type: "array"
+    default: ["ai-generated", "story", "from-plan"]
+    merge_with_defaults: true
+
+  # Custom fields
+  custom_fields:
+    epic_link:
+      field_id: "customfield_10008"
+      variable: "{{story.epic_link}}"
+      description: "Link to parent epic (e.g., DATA-12345)"
+      required: false
+      validation:
+        pattern: "^[A-Z]+-[0-9]+$"
+
+    story_points:
+      field_id: "customfield_10004"
+      variable: "{{story.story_points}}"
+      description: "Story point estimation"
+      type: "number"
+      required: false
+      allowed_values: [1, 2, 3, 5, 8, 13, 21]
+
+    sprint:
+      field_id: "customfield_10001"
+      variable: "{{story.sprint}}"
+      description: "Sprint assignment"
+      required: false
+
+# Template variations
+variations:
+  # Minimal story template
+  minimal:
+    description: |
+      h2. User Story
+      *As a* {{story.user_type}}
+      *I want* {{story.goal}}
+      *So that* {{story.benefit}}
+
+      h2. Acceptance Criteria
+      {{story.acceptance_criteria}}
+
+      h2. Technical Notes
+      {{story.technical_notes}}
+
+  # Technical task template (not user-facing)
+  technical_task:
+    description: |
+      h2. Technical Task
+      {{story.task_description}}
+
+      h2. Implementation Details
+      {{story.implementation_details}}
+
+      h2. Acceptance Criteria
+      {{story.acceptance_criteria}}
+
+      h2. Testing
+      {{story.testing_approach}}
+
+  # Bug fix story template
+  bug_fix:
+    description: |
+      h2. Bug Description
+      {{story.bug_description}}
+
+      h2. Root Cause
+      {{story.root_cause}}
+
+      h2. Proposed Solution
+      {{story.solution}}
+
+      h2. Acceptance Criteria
+      {{story.acceptance_criteria}}
+
+      h2. Testing
+      {{story.testing_approach}}
+
+      h2. Regression Prevention
+      {{story.regression_prevention}}
+
+  # Spike/Research story template
+  spike:
+    description: |
+      h2. Research Question
+      {{story.research_question}}
+
+      h2. Context
+      {{story.context}}
+
+      h2. Goals
+      {{story.goals}}
+
+      h2. Deliverables
+      {{story.deliverables}}
+
+      h2. Acceptance Criteria
+      {{story.acceptance_criteria}}
+
+      h2. Time Box
+      {{story.time_box}}
+
+# JIRA API payload structure
+jira_payload:
+  fields:
+    project:
+      key: "{{project_key}}"
+    summary: "{{story.summary}}"
+    description: "{{story.description}}"
+    issuetype:
+      name: "Story"
+    priority:
+      name: "{{story.priority}}"
+    labels: "{{story.labels}}"
+    customfield_10008: "{{story.epic_link}}"
+    customfield_10004: "{{story.story_points}}"
+
+# Validation rules
+validation:
+  summary:
+    required: true
+    min_length: 10
+    max_length: 255
+
+  description:
+    required: true
+    min_length: 50
+    recommended_length: 200
+
+  story_points:
+    required: false
+    allowed_values: [1, 2, 3, 5, 8, 13, 21]
+
+  epic_link:
+    required: false
+    pattern: "^[A-Z]+-[0-9]+$"
+
+# Post-creation actions
+post_creation:
+  - action: "log"
+    message: "Story created and linked to epic {{story.epic_link}}"
+
+  - action: "create_subtasks"
+    description: "Optionally create subtasks if defined"
+
+  - action: "notify"
+    description: "Add to output report"

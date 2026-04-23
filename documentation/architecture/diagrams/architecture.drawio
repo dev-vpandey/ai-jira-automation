@@ -1,0 +1,106 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="System Architecture" id="arch-1">
+    <mxGraphModel dx="2492" dy="729" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="layer-ui" parent="1" style="swimlane;startSize=40;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;fontSize=14;opacity=30;" value="LAYER 1: USER INTERFACES" vertex="1">
+          <mxGeometry height="180" width="1000" x="60" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="ui-natural" parent="layer-ui" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;fontSize=13;" value="Natural Language&#xa;(Claude Code Skill)" vertex="1">
+          <mxGeometry height="80" width="180" x="40" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="ui-shell" parent="layer-ui" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;fontSize=13;" value="Shell Commands&#xa;jira-epic | jira-story&#xa;jira-subtask" vertex="1">
+          <mxGeometry height="80" width="180" x="280" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="ui-api" parent="layer-ui" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;fontSize=13;" value="Programmatic API&#xa;create_epic()&#xa;create_story()&#xa;create_subtask()" vertex="1">
+          <mxGeometry height="80" width="180" x="520" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="ui-user" parent="layer-ui" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;fontSize=14;" value="USER" vertex="1">
+          <mxGeometry height="60" width="160" x="780" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="layer-orch" parent="1" style="swimlane;startSize=40;fillColor=#ffe6cc;strokeColor=#d79b00;fontStyle=1;fontSize=14;opacity=30;" value="LAYER 2: WORKFLOW ORCHESTRATION" vertex="1">
+          <mxGeometry height="220" width="1000" x="60" y="300" as="geometry" />
+        </mxCell>
+        <mxCell id="orch-prompts" parent="layer-orch" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=13;" value="Interactive&#xa;Prompts" vertex="1">
+          <mxGeometry height="70" width="140" x="40" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="orch-search" parent="layer-orch" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=13;fontStyle=1;" value="Epic Search&#xa;&amp; Suggestion" vertex="1">
+          <mxGeometry height="70" width="140" x="220" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="orch-templates" parent="layer-orch" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=13;" value="Template&#xa;Processing" vertex="1">
+          <mxGeometry height="70" width="140" x="400" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="orch-validation" parent="layer-orch" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=13;" value="Field&#xa;Validation" vertex="1">
+          <mxGeometry height="70" width="140" x="580" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="orch-preview" parent="layer-orch" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=13;" value="Preview &amp;&#xa;Confirmation" vertex="1">
+          <mxGeometry height="70" width="140" x="760" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="layer-jira" parent="1" style="swimlane;startSize=40;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;fontSize=14;opacity=30;" value="LAYER 3: JIRA INTEGRATION" vertex="1">
+          <mxGeometry height="180" width="1000" x="60" y="580" as="geometry" />
+        </mxCell>
+        <mxCell id="jira-api" parent="layer-jira" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;fontSize=13;" value="JIRA REST API&#xa;/rest/api/2/issue" vertex="1">
+          <mxGeometry height="80" width="180" x="40" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="jira-mapping" parent="layer-jira" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=13;" value="Field Mapping&#xa;Custom Field IDs&#xa;12131, 12130, 10004" vertex="1">
+          <mxGeometry height="80" width="180" x="280" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="jira-creation" parent="layer-jira" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=13;" value="Issue Creation&#xa;Epic → Story → Subtask&#xa;Hierarchy &amp; Linking" vertex="1">
+          <mxGeometry height="80" width="180" x="520" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="jira-server" parent="layer-jira" style="shape=cylinder;whiteSpace=wrap;html=1;boundedLbl=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;fontSize=13;" value="JIRA Server&#xa;jira.ops.expertcity.com" vertex="1">
+          <mxGeometry height="100" width="180" x="760" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow-jira-flow" edge="1" parent="layer-jira" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;html=1;strokeWidth=3;strokeColor=#82b366;" value="Process →">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="220" y="80" as="sourcePoint" />
+            <mxPoint x="759.9999999999995" y="80" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arrow-ui-to-orch-1" edge="1" parent="1" source="ui-natural" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;html=1;strokeWidth=2;strokeColor=#6c8ebf;" target="orch-prompts" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow-ui-to-orch-2" edge="1" parent="1" source="ui-shell" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;html=1;strokeWidth=2;strokeColor=#6c8ebf;" target="orch-search" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow-ui-to-orch-3" edge="1" parent="1" source="ui-api" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;html=1;strokeWidth=2;strokeColor=#82b366;" target="orch-templates" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow-user-to-ui" edge="1" parent="1" source="ui-user" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;html=1;strokeWidth=2;strokeColor=#d6b656;dashed=1;" target="ui-natural" value="Natural language,&#xa;commands, or&#xa;function calls">
+          <mxGeometry relative="1" x="0.1482" y="-18" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="920" y="119" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arrow-orch-flow" edge="1" parent="1" source="orch-prompts" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;html=1;strokeWidth=3;strokeColor=#d79b00;" target="orch-preview" value="Data Flow →">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="440" y="380" />
+              <mxPoint x="440" y="380" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arrow-orch-to-jira-1" edge="1" parent="1" source="orch-preview" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;html=1;strokeWidth=2;strokeColor=#82b366;" target="jira-api" value="JSON Payload">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="890" y="460" />
+              <mxPoint x="190" y="460" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="label-input" parent="1" style="text;html=1;align=center;fontStyle=1;fontSize=16;fillColor=none;strokeColor=none;fontColor=#6c8ebf;" value="INPUT" vertex="1">
+          <mxGeometry height="30" width="40" x="10" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="label-process" parent="1" style="text;html=1;align=center;fontStyle=1;fontSize=16;fillColor=none;strokeColor=none;fontColor=#d79b00;" value="PROCESS" vertex="1">
+          <mxGeometry height="30" width="40" x="10" y="380" as="geometry" />
+        </mxCell>
+        <mxCell id="label-output" parent="1" style="text;html=1;align=center;fontStyle=1;fontSize=16;fillColor=none;strokeColor=none;fontColor=#82b366;" value="OUTPUT" vertex="1">
+          <mxGeometry height="30" width="40" x="10" y="640" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

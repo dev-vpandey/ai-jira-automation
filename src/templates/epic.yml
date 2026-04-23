@@ -1,0 +1,237 @@
+# Epic Template
+# JIRA Epic issue template with wiki markup
+# Variables: {{variable_name}} with optional |default:"value"
+
+meta:
+  issue_type: "Epic"
+  template_version: "1.0"
+  description: "Template for creating JIRA Epics from implementation plans"
+
+# Required fields
+required:
+  - summary
+  - epic_name
+
+# Field definitions
+fields:
+  # Standard fields
+  summary:
+    variable: "{{epic.summary}}"
+    description: "Epic title - clear, concise, action-oriented"
+    validation:
+      min_length: 10
+      max_length: 255
+      pattern: "^[A-Z].*"
+    examples:
+      - "AI-Powered Recommendation Engine"
+      - "Data Pipeline Modernization Initiative"
+      - "Customer Analytics Dashboard v2.0"
+
+  description:
+    variable: "{{epic.description}}"
+    format: "wiki"
+    template: |
+      h1. {{epic.name | default:"Epic Name"}}
+
+      h2. 🎯 Overview
+      {{epic.overview | default:"Provide a high-level overview of this epic and what it aims to achieve."}}
+
+      h2. 💼 Business Value
+      {{epic.business_value | default:"Describe the business value, ROI, and impact on customers/business."}}
+
+      *Key Benefits:*
+      * {{epic.benefit_1 | default:"Benefit 1"}}
+      * {{epic.benefit_2 | default:"Benefit 2"}}
+      * {{epic.benefit_3 | default:"Benefit 3"}}
+
+      h2. 🎯 Goals & Objectives
+      {{epic.goals | default:"* Goal 1: [Describe]\n* Goal 2: [Describe]\n* Goal 3: [Describe]"}}
+
+      h2. ✅ Success Criteria
+      {{epic.success_criteria | default:"* Criteria 1: [Measurable outcome]\n* Criteria 2: [Measurable outcome]\n* Criteria 3: [Measurable outcome]"}}
+
+      h2. 📋 Scope
+
+      *In Scope:*
+      {{epic.in_scope | default:"* Item 1\n* Item 2"}}
+
+      *Out of Scope:*
+      {{epic.out_of_scope | default:"* Item 1\n* Item 2"}}
+
+      h2. 🔗 Dependencies
+      {{epic.dependencies | default:"* No dependencies identified"}}
+
+      h2. 🏗️ Architecture & Technical Approach
+      {{epic.architecture | default:"Describe high-level architecture, technology stack, and technical approach."}}
+
+      h2. 👥 Stakeholders
+      * *Product Owner:* {{epic.product_owner | default:"TBD"}}
+      * *Tech Lead:* {{epic.tech_lead | default:"TBD"}}
+      * *Stakeholders:* {{epic.stakeholders | default:"TBD"}}
+
+      h2. 📅 Timeline
+      * *Start Date:* {{epic.start_date | default:"TBD"}}
+      * *Target Completion:* {{epic.end_date | default:"TBD"}}
+      * *Estimated Duration:* {{epic.duration | default:"TBD"}}
+
+      h2. 🎖️ Milestones
+      {{epic.milestones | default:"* Milestone 1: [Date]\n* Milestone 2: [Date]\n* Milestone 3: [Date]"}}
+
+      h2. 📊 Metrics & KPIs
+      {{epic.metrics | default:"* Metric 1: [Target]\n* Metric 2: [Target]\n* Metric 3: [Target]"}}
+
+      h2. ⚠️ Risks & Mitigation
+      {{epic.risks | default:"* Risk 1: [Description] - Mitigation: [Strategy]\n* Risk 2: [Description] - Mitigation: [Strategy]"}}
+
+      h2. 📝 Additional Notes
+      {{epic.notes | default:"Add any additional context, links to documents, or references."}}
+
+      ----
+      _Generated via AI JIRA Automation on {{timestamp}}_
+
+  priority:
+    variable: "{{epic.priority}}"
+    default: "P1"
+    allowed_values: ["P0", "P1", "P2", "P3", "Unprioritized"]
+
+  components:
+    variable: "{{epic.component}}"
+    type: "array"
+    default: ["DATA-BFRM"]
+    description: "Component (default: DATA-BFRM - Bangalore Framework)"
+
+  labels:
+    variable: "{{epic.labels}}"
+    type: "array"
+    default: ["ai-generated", "epic", "from-plan"]
+    merge_with_defaults: true
+
+  # Custom fields
+  custom_fields:
+    epic_name:
+      field_id: "customfield_10011"
+      variable: "{{epic.name}}"
+      description: "Short epic identifier (e.g., AI-REC-ENGINE)"
+      validation:
+        max_length: 50
+        pattern: "^[A-Z0-9-]+$"
+      examples:
+        - "DATA-PIPELINE-MOD"
+        - "AI-RECOMMENDATION"
+        - "ANALYTICS-V2"
+
+# Template variations
+variations:
+  # Minimal epic template (for quick creation)
+  minimal:
+    description: |
+      h1. {{epic.name}}
+
+      h2. Overview
+      {{epic.overview}}
+
+      h2. Goals
+      {{epic.goals}}
+
+      h2. Success Criteria
+      {{epic.success_criteria}}
+
+  # Technical epic template
+  technical:
+    description: |
+      h1. {{epic.name}} - Technical Epic
+
+      h2. Technical Overview
+      {{epic.technical_overview}}
+
+      h2. Architecture
+      {{epic.architecture}}
+
+      h2. Technology Stack
+      {{epic.tech_stack}}
+
+      h2. Technical Requirements
+      {{epic.technical_requirements}}
+
+      h2. Implementation Approach
+      {{epic.implementation_approach}}
+
+      h2. Testing Strategy
+      {{epic.testing_strategy}}
+
+      h2. Deployment Plan
+      {{epic.deployment_plan}}
+
+      h2. Rollback Strategy
+      {{epic.rollback_strategy}}
+
+  # Initiative/program epic template
+  initiative:
+    description: |
+      h1. {{epic.name}} - Strategic Initiative
+
+      h2. Executive Summary
+      {{epic.executive_summary}}
+
+      h2. Strategic Alignment
+      {{epic.strategic_alignment}}
+
+      h2. Business Case
+      {{epic.business_case}}
+
+      h2. Investment Required
+      {{epic.investment}}
+
+      h2. Expected ROI
+      {{epic.roi}}
+
+      h2. Program Structure
+      {{epic.program_structure}}
+
+      h2. Governance
+      {{epic.governance}}
+
+# JIRA API payload structure
+jira_payload:
+  fields:
+    project:
+      key: "{{project_key}}"
+    summary: "{{epic.summary}}"
+    description: "{{epic.description}}"
+    issuetype:
+      name: "Epic"
+    priority:
+      name: "{{epic.priority | default:'P1'}}"
+    components:
+      - name: "{{epic.component | default:'DATA-BFRM'}}"
+    labels: "{{epic.labels}}"
+    customfield_10011: "{{epic.name}}"
+
+# Validation rules
+validation:
+  summary:
+    required: true
+    min_length: 10
+    max_length: 255
+
+  epic_name:
+    required: true
+    min_length: 3
+    max_length: 50
+    pattern: "^[A-Z][A-Z0-9-]*$"
+
+  description:
+    required: false
+    min_length: 50
+    recommended_length: 200
+
+# Post-creation actions
+post_creation:
+  - action: "log"
+    message: "Epic {{epic.name}} created successfully"
+
+  - action: "link_stories"
+    description: "Automatically link related stories if epic_link is provided"
+
+  - action: "notify"
+    description: "Add to output report"

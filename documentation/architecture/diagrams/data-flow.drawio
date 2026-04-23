@@ -1,0 +1,137 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Complete Data Flow" id="dataflow-1">
+    <mxGraphModel dx="1660" dy="924" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="user" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=14;fontStyle=1;" value="USER" vertex="1">
+          <mxGeometry height="120" width="60" x="100" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="input-nl" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=12;" value="Natural Language&#xa;&#39;Create epic for X&#39;" vertex="1">
+          <mxGeometry height="60" width="160" x="260" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="input-shell" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;fontFamily=Courier New;" value="Shell Command&#xa;$ jira-epic" vertex="1">
+          <mxGeometry height="60" width="160" x="260" y="140" as="geometry" />
+        </mxCell>
+        <mxCell id="input-api" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;fontFamily=Courier New;" value="API Call&#xa;create_epic(...)" vertex="1">
+          <mxGeometry height="60" width="160" x="260" y="220" as="geometry" />
+        </mxCell>
+        <mxCell id="struct-data" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;fontFamily=Courier New;align=left;spacingLeft=10;" value="STRUCTURED DATA&#xa;{&#xa;  &#39;summary&#39;: &#39;Epic title&#39;,&#xa;  &#39;epic_name&#39;: &#39;EPIC-NAME&#39;,&#xa;  &#39;priority&#39;: &#39;P1&#39;,&#xa;  &#39;component&#39;: &#39;DATA-BFRM&#39;,&#xa;  &#39;goals&#39;: [...],&#xa;  &#39;business_value&#39;: &#39;...&#39;&#xa;}" vertex="1">
+          <mxGeometry height="180" width="240" x="500" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="proc-zone" parent="1" style="swimlane;startSize=35;fillColor=#ffe6cc;strokeColor=#d79b00;fontStyle=1;fontSize=13;opacity=20;" value="PROCESSING PIPELINE" vertex="1">
+          <mxGeometry height="680" width="680" x="820" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="proc-1" parent="proc-zone" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=12;" value="1. Apply Defaults&#xa;• Priority: P1&#xa;• Component: DATA-BFRM" vertex="1">
+          <mxGeometry height="70" width="180" x="40" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="proc-2" parent="proc-zone" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=12;" value="2. Load Template&#xa;epic.yml" vertex="1">
+          <mxGeometry height="70" width="140" x="260" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="proc-3" parent="proc-zone" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=12;" value="3. Process Template&#xa;• Replace variables&#xa;• Add wiki markup&#xa;• Fill sections" vertex="1">
+          <mxGeometry height="70" width="180" x="440" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="proc-4" parent="proc-zone" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=12;" value="4. Validate Fields&#xa;• Required fields?&#xa;• Format correct?&#xa;• Length limits?" vertex="1">
+          <mxGeometry height="80" width="180" x="40" y="170" as="geometry" />
+        </mxCell>
+        <mxCell id="proc-5" parent="proc-zone" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=11;fontFamily=Courier New;" value="5. Map Fields&#xa;field-mappings.yml&#xa;&#xa;summary → summary&#xa;epic_name → customfield_12131&#xa;priority → priority" vertex="1">
+          <mxGeometry height="100" width="200" x="260" y="170" as="geometry" />
+        </mxCell>
+        <mxCell id="proc-6" parent="proc-zone" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;fontFamily=Courier New;align=left;spacingLeft=10;" value="6. Generate JSON&#xa;{&#xa;  &#39;fields&#39;: {&#xa;    &#39;project&#39;: {&#39;key&#39;: &#39;DATA&#39;},&#xa;    &#39;summary&#39;: &#39;...&#39;,&#xa;    &#39;customfield_12131&#39;: &#39;...&#39;,&#xa;    &#39;priority&#39;: {&#39;name&#39;: &#39;P1&#39;},&#xa;    &#39;components&#39;: [...]&#xa;  }&#xa;}" vertex="1">
+          <mxGeometry height="150" width="280" x="40" y="310" as="geometry" />
+        </mxCell>
+        <mxCell id="proc-7" parent="proc-zone" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=12;" value="7. Preview &amp; Confirm&#xa;Show user:&#xa;• Summary&#xa;• Priority&#xa;• Component&#xa;&#xa;Confirm? (y/n)" vertex="1">
+          <mxGeometry height="120" width="180" x="380" y="310" as="geometry" />
+        </mxCell>
+        <mxCell id="proc-8" parent="proc-zone" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;fontFamily=Courier New;" value="8. POST Request&#xa;&#xa;POST /rest/api/2/issue&#xa;Authorization: Bearer&#xa;Content-Type: application/json&#xa;Body: {JSON payload}" vertex="1">
+          <mxGeometry height="120" width="240" x="40" y="510" as="geometry" />
+        </mxCell>
+        <mxCell id="jira-server" parent="1" style="shape=cylinder;whiteSpace=wrap;html=1;boundedLbl=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;fontSize=13;" value="JIRA SERVER&#xa;&#xa;jira.ops.expertcity.com&#xa;&#xa;Receives request&#xa;Validates&#xa;Creates issue&#xa;Returns response" vertex="1">
+          <mxGeometry height="180" width="200" x="1580" y="380" as="geometry" />
+        </mxCell>
+        <mxCell id="response" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;fontFamily=Courier New;align=left;spacingLeft=10;" value="JIRA RESPONSE&#xa;{&#xa;  &#39;id&#39;: &#39;67890&#39;,&#xa;  &#39;key&#39;: &#39;DATA-67800&#39;,&#xa;  &#39;self&#39;: &#39;https://jira.../issue/67800&#39;&#xa;}" vertex="1">
+          <mxGeometry height="100" width="340" x="1320" y="620" as="geometry" />
+        </mxCell>
+        <mxCell id="format-output" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;" value="Format Output&#xa;✅ Epic: DATA-67800&#xa;   Summary: ...&#xa;   Priority: P1&#xa;   Component: DATA-BFRM&#xa;   URL: https://jira...&#xa;&#xa;Save to outputs/" vertex="1">
+          <mxGeometry height="130" width="260" x="940" y="800" as="geometry" />
+        </mxCell>
+        <mxCell id="user-result" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;fontSize=14;" value="USER SEES RESULT&#xa;&#xa;✅ Success!" vertex="1">
+          <mxGeometry height="80" width="200" x="520" y="850" as="geometry" />
+        </mxCell>
+        <mxCell id="audit" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=11;" value="Audit Trail&#xa;outputs/2026-04-03-*.json&#xa;&#xa;• Issue keys&#xa;• Timestamps&#xa;• Full payloads" vertex="1">
+          <mxGeometry height="100" width="200" x="940" y="960" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow-1" edge="1" parent="1" source="user" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=2;strokeColor=#9673a6;" target="input-nl" value="Input">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow-2" edge="1" parent="1" source="user" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=2;strokeColor=#6c8ebf;" target="input-shell" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow-3" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=2;strokeColor=#82b366;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="130" y="270" />
+            </Array>
+            <mxPoint x="130" y="220" as="sourcePoint" />
+            <mxPoint x="260" y="270" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arrow-4" edge="1" parent="1" source="input-nl" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=2;" target="struct-data" value="Extract/Collect">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow-5" edge="1" parent="1" source="input-shell" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=2;" target="struct-data" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow-6" edge="1" parent="1" source="input-api" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=2;" target="struct-data" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow-7" edge="1" parent="1" source="struct-data" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=3;strokeColor=#d79b00;" target="proc-1" value="Process">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow-8" edge="1" parent="1" source="proc-1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=2;strokeColor=#d79b00;" target="proc-8" value="Pipeline →">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="840" y="135" />
+              <mxPoint x="840" y="330" />
+              <mxPoint x="820" y="330" />
+              <mxPoint x="820" y="610" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arrow-9" edge="1" parent="1" source="proc-8" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=3;strokeColor=#82b366;" target="jira-server" value="HTTP POST">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow-10" edge="1" parent="1" source="jira-server" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=2;strokeColor=#82b366;" target="response" value="HTTP 201&#xa;Created">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow-11" edge="1" parent="1" source="response" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=2;" target="format-output" value="Parse">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow-12" edge="1" parent="1" source="format-output" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=2;strokeColor=#82b366;" target="user-result" value="Display">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow-13" edge="1" parent="1" source="format-output" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=1;dashed=1;strokeColor=#666666;" target="audit" value="Log">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="label-input" parent="1" style="text;html=1;align=center;fontStyle=1;fontSize=18;fillColor=none;strokeColor=none;fontColor=#6c8ebf;" value="INPUT" vertex="1">
+          <mxGeometry height="30" width="160" x="260" y="10" as="geometry" />
+        </mxCell>
+        <mxCell id="label-structure" parent="1" style="text;html=1;align=center;fontStyle=1;fontSize=18;fillColor=none;strokeColor=none;fontColor=#d6b656;" value="STRUCTURE" vertex="1">
+          <mxGeometry height="30" width="240" x="500" y="10" as="geometry" />
+        </mxCell>
+        <mxCell id="label-process" parent="1" style="text;html=1;align=center;fontStyle=1;fontSize=18;fillColor=none;strokeColor=none;fontColor=#d79b00;" value="PROCESSING" vertex="1">
+          <mxGeometry height="30" width="680" x="820" y="10" as="geometry" />
+        </mxCell>
+        <mxCell id="label-jira" parent="1" style="text;html=1;align=center;fontStyle=1;fontSize=18;fillColor=none;strokeColor=none;fontColor=#82b366;" value="JIRA" vertex="1">
+          <mxGeometry height="30" width="200" x="1580" y="340" as="geometry" />
+        </mxCell>
+        <mxCell id="label-output" parent="1" style="text;html=1;align=center;fontStyle=1;fontSize=18;fillColor=none;strokeColor=none;fontColor=#82b366;" value="OUTPUT" vertex="1">
+          <mxGeometry height="30" width="200" x="520" y="800" as="geometry" />
+        </mxCell>
+        <mxCell id="label-time" parent="1" style="text;html=1;align=center;fontStyle=1;fontSize=14;fillColor=none;strokeColor=none;fontColor=#333333;" value="⏱️ Total Time: 30-45 seconds (from request to created issue)" vertex="1">
+          <mxGeometry height="30" width="600" x="100" y="1020" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
