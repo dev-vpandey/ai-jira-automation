@@ -1,0 +1,273 @@
+# Subtask Template
+# JIRA Sub-task issue template with wiki markup
+# Variables: {{variable_name}} with optional |default:"value"
+
+meta:
+  issue_type: "Sub-task"
+  template_version: "1.0"
+  description: "Template for creating JIRA Subtasks under Stories"
+
+# Required fields
+required:
+  - summary
+  - parent
+
+# Field definitions
+fields:
+  # Standard fields
+  summary:
+    variable: "{{subtask.summary}}"
+    description: "Subtask title - specific, actionable, clear"
+    validation:
+      min_length: 10
+      max_length: 255
+      pattern: "^[A-Z].*"
+    examples:
+      - "Write unit tests for authentication service"
+      - "Update API documentation for new endpoints"
+      - "Implement database migration for user table"
+      - "Create integration tests for payment flow"
+
+  description:
+    variable: "{{subtask.description}}"
+    format: "wiki"
+    template: |
+      h2. 📋 Task Description
+      {{subtask.detailed_description | default:"Describe exactly what needs to be done in this subtask."}}
+
+      h2. 🎯 Objective
+      {{subtask.objective | default:"What is the specific goal of this subtask?"}}
+
+      h2. 🔧 Implementation Steps
+
+      {{subtask.implementation_steps | default:"# Step 1: [Action]\n# Step 2: [Action]\n# Step 3: [Action]\n# Step 4: [Action]"}}
+
+      h2. ✅ Definition of Done
+
+      {{subtask.definition_of_done | default:"* [ ] Code implemented and follows coding standards\n* [ ] Unit tests written and passing (>80% coverage)\n* [ ] Integration tests passing\n* [ ] Code reviewed and approved\n* [ ] Documentation updated\n* [ ] No new warnings or errors\n* [ ] Merged to development branch"}}
+
+      h2. 🧪 Testing Requirements
+
+      *Unit Tests:*
+      {{subtask.unit_test_requirements | default:"* Test case 1\n* Test case 2"}}
+
+      *Integration Tests:*
+      {{subtask.integration_test_requirements | default:"* Test scenario 1\n* Test scenario 2"}}
+
+      *Manual Verification:*
+      {{subtask.manual_verification | default:"* Verification step 1\n* Verification step 2"}}
+
+      h2. 📂 Files to Modify/Create
+
+      {{subtask.files | default:"* /path/to/file1.js\n* /path/to/file2.js\n* /path/to/test/file1.test.js"}}
+
+      h2. 🔗 Dependencies
+
+      {{subtask.dependencies | default:"* Depends on: [Other subtask/story]\n* Required libraries: [List]\n* Environment setup: [Requirements]"}}
+
+      h2. 📚 References
+
+      {{subtask.references | default:"* Documentation: [link]\n* Related PR: [link]\n* Design doc: [link]"}}
+
+      h2. ⚠️ Potential Issues / Edge Cases
+
+      {{subtask.potential_issues | default:"* Edge case 1\n* Edge case 2\n* Known limitation 1"}}
+
+      h2. ⏱️ Estimated Effort
+      {{subtask.estimated_effort | default:"[X hours/days]"}}
+
+      h2. 📝 Additional Notes
+      {{subtask.notes | default:"Any additional context or special considerations."}}
+
+      ----
+      _Generated via AI JIRA Automation on {{timestamp}}_
+
+  parent:
+    variable: "{{subtask.parent}}"
+    description: "Parent story key (e.g., DATA-12345)"
+    required: true
+    validation:
+      pattern: "^[A-Z]+-[0-9]+$"
+
+  priority:
+    variable: "{{subtask.priority}}"
+    default: "Medium"
+    allowed_values: ["Highest", "High", "Medium", "Low", "Lowest"]
+
+  labels:
+    variable: "{{subtask.labels}}"
+    type: "array"
+    default: ["ai-generated", "subtask", "from-plan"]
+    merge_with_defaults: true
+
+  assignee:
+    variable: "{{subtask.assignee}}"
+    description: "Subtask assignee (optional)"
+    required: false
+
+# Template variations
+variations:
+  # Minimal subtask template
+  minimal:
+    description: |
+      h2. Task
+      {{subtask.description}}
+
+      h2. Steps
+      {{subtask.steps}}
+
+      h2. Done When
+      {{subtask.done_criteria}}
+
+  # Development subtask template
+  development:
+    description: |
+      h2. Development Task
+      {{subtask.dev_description}}
+
+      h2. Implementation
+      {{subtask.implementation_details}}
+
+      h2. Files to Modify
+      {{subtask.files}}
+
+      h2. Testing
+      {{subtask.testing_requirements}}
+
+      h2. Code Review Checklist
+      * [ ] Code follows style guide
+      * [ ] Tests added/updated
+      * [ ] Documentation updated
+      * [ ] No TODOs or FIXMEs
+      * [ ] Performance considered
+
+  # Testing subtask template
+  testing:
+    description: |
+      h2. Testing Task
+      {{subtask.testing_description}}
+
+      h2. Test Cases
+      {{subtask.test_cases}}
+
+      h2. Test Data
+      {{subtask.test_data}}
+
+      h2. Expected Results
+      {{subtask.expected_results}}
+
+      h2. Pass Criteria
+      {{subtask.pass_criteria}}
+
+  # Documentation subtask template
+  documentation:
+    description: |
+      h2. Documentation Task
+      {{subtask.doc_description}}
+
+      h2. Documents to Update
+      {{subtask.documents}}
+
+      h2. Content Outline
+      {{subtask.content_outline}}
+
+      h2. Audience
+      {{subtask.audience}}
+
+      h2. Done When
+      * [ ] Documentation written
+      * [ ] Reviewed for accuracy
+      * [ ] Examples added
+      * [ ] Published/merged
+
+  # DevOps subtask template
+  devops:
+    description: |
+      h2. DevOps Task
+      {{subtask.devops_description}}
+
+      h2. Infrastructure Changes
+      {{subtask.infrastructure_changes}}
+
+      h2. Configuration
+      {{subtask.configuration}}
+
+      h2. Deployment Steps
+      {{subtask.deployment_steps}}
+
+      h2. Rollback Plan
+      {{subtask.rollback_plan}}
+
+      h2. Verification
+      {{subtask.verification_steps}}
+
+# Common subtask types
+common_types:
+  - name: "Backend Implementation"
+    summary_pattern: "Implement {{feature}} backend service"
+
+  - name: "Frontend Implementation"
+    summary_pattern: "Build {{feature}} UI components"
+
+  - name: "API Development"
+    summary_pattern: "Create API endpoint for {{feature}}"
+
+  - name: "Unit Testing"
+    summary_pattern: "Write unit tests for {{component}}"
+
+  - name: "Integration Testing"
+    summary_pattern: "Create integration tests for {{feature}}"
+
+  - name: "Database Schema"
+    summary_pattern: "Design and implement {{entity}} database schema"
+
+  - name: "Documentation"
+    summary_pattern: "Document {{feature}} implementation"
+
+  - name: "Code Review"
+    summary_pattern: "Code review for {{feature}}"
+
+  - name: "Deployment"
+    summary_pattern: "Deploy {{feature}} to {{environment}}"
+
+  - name: "Bug Fix"
+    summary_pattern: "Fix {{bug_description}}"
+
+# JIRA API payload structure
+jira_payload:
+  fields:
+    project:
+      key: "{{project_key}}"
+    summary: "{{subtask.summary}}"
+    description: "{{subtask.description}}"
+    issuetype:
+      name: "Sub-task"
+    parent:
+      key: "{{subtask.parent}}"
+    priority:
+      name: "{{subtask.priority}}"
+    labels: "{{subtask.labels}}"
+
+# Validation rules
+validation:
+  summary:
+    required: true
+    min_length: 10
+    max_length: 255
+
+  parent:
+    required: true
+    pattern: "^[A-Z]+-[0-9]+$"
+
+  description:
+    required: false
+    min_length: 20
+    recommended_length: 100
+
+# Post-creation actions
+post_creation:
+  - action: "log"
+    message: "Subtask created under parent {{subtask.parent}}"
+
+  - action: "notify"
+    description: "Add to output report"

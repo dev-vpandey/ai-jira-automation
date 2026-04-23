@@ -1,0 +1,76 @@
+# JIRA Configuration
+# This file contains your JIRA instance settings and connection details
+
+jira:
+  # JIRA instance URL
+  server: "https://jira.ops.expertcity.com"
+
+  # Default project key
+  project: "DATA"
+
+  # API authentication (uses JIRA_API_TOKEN environment variable)
+  # Token should be set in your shell environment
+  auth:
+    type: "bearer"
+    token_env_var: "JIRA_API_TOKEN"
+
+  # API endpoints
+  api:
+    base: "/rest/api/2"
+    issue: "/rest/api/2/issue"
+    search: "/rest/api/2/search"
+    user: "/rest/api/2/myself"
+
+# Issue type configuration
+issue_types:
+  epic:
+    name: "Epic"
+    enabled: true
+  story:
+    name: "Story"
+    enabled: true
+  subtask:
+    name: "Sub-task"
+    enabled: true
+  task:
+    name: "Task"
+    enabled: true
+  bug:
+    name: "Bug"
+    enabled: true
+
+# Priority mappings (DATA project specific)
+priorities:
+  - "P0"  # Critical/Blocker
+  - "P1"  # High (default)
+  - "P2"  # Medium
+  - "P3"  # Low
+  - "Unprioritized"
+
+# Component mappings
+components:
+  - "DATA-BFRM"  # Bangalore Framework (default)
+  - "DATA-INFRA"  # Infrastructure
+  - "DATA-PIPE"  # Data Pipeline
+  - "DATA-QUAL"  # Data Quality
+
+# Status workflow (for reference)
+statuses:
+  - "To Do"
+  - "In Progress"
+  - "Code Review"
+  - "Testing"
+  - "Done"
+  - "Blocked"
+
+# Label conventions
+labels:
+  automated: "automated"
+  from_plan: "from-plan"
+
+# Logging
+logging:
+  enabled: true
+  level: "INFO"  # DEBUG, INFO, WARN, ERROR
+  output_dir: "../outputs"
+  format: "json"

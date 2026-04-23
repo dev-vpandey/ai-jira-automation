@@ -1,0 +1,183 @@
+# JIRA Field Mappings
+# Configure standard and custom field IDs for your JIRA instance
+#
+# To find custom field IDs:
+# 1. Go to JIRA Administration → Issues → Custom Fields
+# 2. Or use API: curl -H "Authorization: Bearer $TOKEN" https://jira.ops.expertcity.com/rest/api/2/field
+# 3. Look for "customfield_XXXXX" IDs
+
+# Standard JIRA fields (usually consistent across instances)
+standard_fields:
+  project:
+    id: "project"
+    type: "object"
+    required: true
+
+  summary:
+    id: "summary"
+    type: "string"
+    required: true
+    max_length: 255
+
+  description:
+    id: "description"
+    type: "string"
+    required: false
+    format: "wiki"  # JIRA wiki markup
+
+  issuetype:
+    id: "issuetype"
+    type: "object"
+    required: true
+
+  priority:
+    id: "priority"
+    type: "object"
+    required: false
+    allowed_values: ["P0", "P1", "P2", "P3", "Unprioritized"]
+    default: "P1"
+
+  components:
+    id: "components"
+    type: "array"
+    required: false
+    default: ["DATA-BFRM"]
+
+  labels:
+    id: "labels"
+    type: "array"
+    required: false
+
+  assignee:
+    id: "assignee"
+    type: "object"
+    required: false
+
+  reporter:
+    id: "reporter"
+    type: "object"
+    required: false
+
+  parent:
+    id: "parent"
+    type: "object"
+    required: false  # For subtasks
+
+# Custom fields (specific to your JIRA instance)
+# UPDATE THESE based on your JIRA configuration
+custom_fields:
+  epic_name:
+    id: "customfield_12131"
+    type: "string"
+    description: "Epic Name (short identifier)"
+    applies_to: ["Epic"]
+    required: true
+
+  epic_link:
+    id: "customfield_12130"
+    type: "string"
+    description: "Epic Link (links story to epic)"
+    applies_to: ["Story", "Task", "Bug"]
+    required: false
+
+  story_points:
+    id: "customfield_10033"
+    type: "number"
+    description: "Story Points (estimation)"
+    applies_to: ["Story", "Task"]
+    required: false
+
+  sprint:
+    id: "customfield_11430"
+    type: "number"
+    description: "Sprint"
+    applies_to: ["Story", "Task", "Bug", "Sub-task"]
+    required: false
+
+  acceptance_criteria:
+    id: "customfield_10100"
+    type: "string"
+    description: "Acceptance Criteria"
+    applies_to: ["Story", "Task"]
+    required: false
+    format: "wiki"
+
+  technical_notes:
+    id: "customfield_10101"
+    type: "string"
+    description: "Technical Implementation Notes"
+    applies_to: ["Story", "Task"]
+    required: false
+    format: "wiki"
+
+# Field validation rules
+validation:
+  summary:
+    min_length: 10
+    max_length: 255
+    pattern: "^[A-Z].*"  # Must start with capital letter
+
+  description:
+    min_length: 20
+    recommended_length: 100
+
+  story_points:
+    allowed_values: [1, 2, 3, 5, 8, 13, 21]
+
+  epic_name:
+    max_length: 50
+    pattern: "^[A-Z0-9-]+$"  # Uppercase, numbers, hyphens only
+
+# Field defaults
+defaults:
+  priority: "P1"  # P0, P1, P2, P3, Unprioritized
+  component: "DATA-BFRM"  # Default component (Bangalore Framework)
+  labels: ["ai-generated", "automated"]
+
+  # Default assignee strategy
+  assignee:
+    strategy: "unassigned"  # Options: unassigned, current_user, specific_user
+    specific_user: ""  # If strategy is specific_user
+
+# Template variable mappings
+# Maps template variables to JIRA field IDs
+template_mappings:
+  # Epic mappings
+  epic:
+    "{{epic.summary}}": "summary"
+    "{{epic.description}}": "description"
+    "{{epic.name}}": "customfield_12131"
+    "{{epic.priority}}": "priority"
+    "{{epic.labels}}": "labels"
+
+  # Story mappings
+  story:
+    "{{story.summary}}": "summary"
+    "{{story.description}}": "description"
+    "{{story.epic_link}}": "customfield_12130"
+    "{{story.priority}}": "priority"
+    "{{story.story_points}}": "customfield_10033"
+    "{{story.labels}}": "labels"
+
+  # Subtask mappings
+  subtask:
+    "{{subtask.summary}}": "summary"
+    "{{subtask.description}}": "description"
+    "{{subtask.parent}}": "parent"
+    "{{subtask.priority}}": "priority"
+
+# Notes for customization:
+# 1. To add a new custom field:
+#    - Find the field ID from JIRA API or admin panel
+#    - Add entry under custom_fields with proper metadata
+#    - Add validation rules if needed
+#    - Add to template_mappings
+#
+# 2. To modify existing fields:
+#    - Update the field ID if it differs in your instance
+#    - Adjust validation rules as needed
+#    - Keep the description for documentation
+#
+# 3. To disable a field:
+#    - Set required: false
+#    - Remove from template or mark as optional

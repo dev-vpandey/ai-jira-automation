@@ -1,0 +1,234 @@
+# Default Values and Behavior Configuration
+# Customize default values used when creating JIRA issues
+
+# Epic defaults
+epic:
+  priority: "P1"  # P0, P1, P2, P3, Unprioritized
+  component: "DATA-BFRM"  # Default component
+  labels:
+    - "epic"
+  description_template: |
+    h2. Overview
+    [Provide epic overview]
+
+    h2. Business Value
+    [Describe business value and ROI]
+
+    h2. Goals
+    * Goal 1
+    * Goal 2
+
+    h2. Success Criteria
+    * Criteria 1
+    * Criteria 2
+
+    h2. Dependencies
+    * List dependencies or "None"
+
+    h2. Timeline
+    [Estimated timeline]
+
+# Story defaults
+story:
+  priority: "P1"  # P0, P1, P2, P3, Unprioritized
+  component: "DATA-BFRM"  # Default component
+  story_points: null  # null means prompt user
+  labels:
+    - "story"
+  description_template: |
+    h2. User Story
+    *As a* [user type]
+    *I want* [goal]
+    *So that* [benefit]
+
+    h2. Acceptance Criteria
+    * AC 1: [Describe acceptance criteria]
+    * AC 2: [Describe acceptance criteria]
+    * AC 3: [Describe acceptance criteria]
+
+    h2. Technical Notes
+    * [Technical implementation details]
+    * [Architecture considerations]
+    * [Dependencies]
+
+    h2. Testing Strategy
+    * Unit tests: [Describe]
+    * Integration tests: [Describe]
+    * Manual testing: [Describe]
+
+# Subtask defaults
+subtask:
+  priority: "P1"  # P0, P1, P2, P3, Unprioritized
+  component: "DATA-BFRM"  # Default component
+  labels:
+    - "subtask"
+  description_template: |
+    h2. Task Description
+    [Detailed description of what needs to be done]
+
+    h2. Implementation Steps
+    # Step 1
+    # Step 2
+    # Step 3
+
+    h2. Definition of Done
+    * [ ] Code implemented
+    * [ ] Tests written and passing
+    * [ ] Code reviewed
+    * [ ] Documentation updated
+
+# Task defaults (if you use Task instead of Story)
+task:
+  priority: "Medium"
+  labels:
+    - "task"
+  description_template: |
+    h2. Task Description
+    [What needs to be accomplished]
+
+    h2. Steps
+    # Step 1
+    # Step 2
+
+    h2. Deliverables
+    * Deliverable 1
+    * Deliverable 2
+
+# Bug defaults
+bug:
+  priority: "High"
+  labels:
+    - "bug"
+  description_template: |
+    h2. Bug Description
+    [Clear description of the bug]
+
+    h2. Steps to Reproduce
+    # Step 1
+    # Step 2
+    # Step 3
+
+    h2. Expected Behavior
+    [What should happen]
+
+    h2. Actual Behavior
+    [What actually happens]
+
+    h2. Environment
+    * OS:
+    * Browser/App Version:
+    * Other relevant info:
+
+# Workflow behavior
+workflow:
+  # Create issues in batch or one-by-one
+  batch_mode: true
+
+  # Stop on first error or continue
+  continue_on_error: false
+
+  # Automatically link stories to epics
+  auto_link_epic: true
+
+  # Automatically link subtasks to stories
+  auto_link_parent: true
+
+  # Add default labels
+  add_default_labels: true
+
+  # Add generated timestamp to description
+  add_timestamp: true
+
+  # Add creation metadata
+  add_metadata: true
+  metadata_footer: |
+
+    ----
+    _Generated via AI JIRA Automation_
+    _Created: {{timestamp}}_
+
+# Interactive prompts configuration
+prompts:
+  # Confirm before creating issues
+  confirm_creation: true
+
+  # Show dry-run by default
+  default_dry_run: true
+
+  # Ask for story points
+  prompt_story_points: true
+
+  # Ask for sprint assignment
+  prompt_sprint: false
+
+  # Ask for assignee
+  prompt_assignee: false
+
+# Output configuration
+output:
+  # Save created issues to JSON
+  save_output: true
+
+  # Output format
+  format: "json"  # json, yaml, or markdown
+
+  # Include full issue details in output
+  include_details: true
+
+  # Generate markdown summary
+  generate_summary: true
+
+  # Open issues in browser after creation
+  open_in_browser: false
+
+# Parsing configuration (for AI plan parser)
+parsing:
+  # Minimum confidence level for auto-categorization
+  confidence_threshold: 0.7
+
+  # Keywords for epic detection
+  epic_keywords:
+    - "epic"
+    - "initiative"
+    - "project"
+    - "milestone"
+    - "phase"
+
+  # Keywords for story detection
+  story_keywords:
+    - "story"
+    - "feature"
+    - "user story"
+    - "requirement"
+    - "capability"
+
+  # Keywords for subtask detection
+  subtask_keywords:
+    - "subtask"
+    - "sub-task"
+    - "task"
+    - "todo"
+    - "action item"
+
+  # Section headers to look for
+  section_headers:
+    - "# "
+    - "## "
+    - "### "
+    - "Epic:"
+    - "Story:"
+    - "Task:"
+
+# Error handling
+error_handling:
+  # Retry failed API calls
+  retry_enabled: true
+  max_retries: 3
+  retry_delay_seconds: 2
+
+  # Log errors
+  log_errors: true
+
+  # Create rollback file
+  create_rollback: true
+  rollback_dir: "../outputs/rollback"
